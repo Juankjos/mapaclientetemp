@@ -47,7 +47,7 @@ if (!map) {
   draco.setDecoderPath('https://unpkg.com/three@0.159.0/examples/jsm/libs/draco/');
   loader.setDRACOLoader(draco);
 
-  const glbUrl = new URL('modelo/carro.glb', window.location.href).href;
+  const glbUrl = new URL('model/carro.glb', window.location.href).href;
   console.log('[car-overlay] cargando GLB:', glbUrl);
   loader.load(glbUrl, (gltf)=>{
     const car = gltf.scene;
