@@ -1,0 +1,103 @@
+:root{
+  --bg:#f7f9fc; --text:#0b1220; --muted:#5f6b7a; --accent:#0b8fff;
+  --panel:#ffffff; --border:#e6ecf2;
+  /* Estado (legend/badges) ajustado al tema claro */
+  --status-pending:#F59E0B; /* amber */
+  --status-done:#0b8fff;    /* accent blue */
+  --yellow:#E7B400; --green:#0e7a2b; --greenStroke:#0a4a12; /* legacy */
+}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;}
+.wrap{height:100%; position:relative;}
+.map{position:relative; height:100%;}
+#map{height:100%;}
+#three-overlay{position:absolute; inset:0; pointer-events:none; z-index:1300}
+
+/* Uber-like minimal overlay UI */
+.ui-topbar{
+  position:absolute; top:10px; left:10px; right:10px; z-index:1100;
+  display:flex; gap:8px; flex-wrap:wrap; align-items:center;
+  background:rgba(255,255,255,0.74); border:1px solid var(--border);
+  backdrop-filter: blur(8px) saturate(1.05);
+  padding:6px 8px; border-radius:12px;
+  box-shadow: 0 5px 20px rgba(12,18,30,.05);
+}
+.ui-topbar .group{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+.lbl{font-size:11px; color:var(--muted); margin-right:4px}
+.field{display:flex; gap:6px; align-items:center}
+.field input[type="date"], .field select, .field button{
+  height:32px; padding:0 10px; border-radius:10px; border:1px solid var(--border);
+  background:#ffffff; color:var(--text);
+}
+.btn{cursor:pointer; font-weight:600; background:#ffffff;}
+.btn:hover{outline:1px solid #1a90ff}
+.hud{font-size:11px; color:var(--muted); margin-left:auto; padding:0 6px}
+
+/* Asegura que si hay controles Leaflet en top-left, bajen un poco (fallback) */
+.leaflet-top.leaflet-left { top: 64px; }
+
+.ui-card{
+  position:absolute; right:14px; z-index:1100; padding:10px;
+  background:rgba(255,255,255,0.9); border:1px solid var(--border);
+  border-radius:14px; backdrop-filter: blur(6px);
+  box-shadow: 0 4px 24px rgba(12,18,30,.06);
+}
+.ui-card.small{ top:70px; }
+.ui-card.below{ top:140px; }
+.inline{display:flex; gap:8px; align-items:center}
+.legend{display:flex; gap:10px; align-items:center;}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot.yellow{background:var(--status-pending); box-shadow:0 0 0 2px rgba(245,158,11,.35) inset}
+.dot.green{background:var(--status-done); box-shadow:0 0 0 2px rgba(11,143,255,.35) inset}
+/* — Modal mínimo para datos del cliente — */
+.modal {
+  position: fixed; inset: 0; display: none; place-items: center;
+  z-index: 1300; background: rgba(255,255,255,.35); backdrop-filter: blur(2px);
+}
+.modal.open { display: grid; }
+.modal-card {
+  width: min(520px, 92vw); background: #ffffff;
+  border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px;
+  color: var(--text); box-shadow: 0 10px 40px rgba(12,18,30,.10);
+}
+.modal-card h4 {
+  margin: 0 0 6px 0; font-size: 16px; color: var(--text);
+}
+.modal-row { margin: 4px 0; color: var(--muted); }
+.modal-actions { display:flex; justify-content:flex-end; margin-top:10px; }
+.modal-actions button {
+  background: #ffffff;
+  border: 1px solid var(--border); color: var(--text); border-radius: 10px; 
+  padding: 8px 12px;     margin-top: 12px;
+  font-weight: 700; cursor: pointer;
+}
+.badge-state { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; margin-left:6px; }
+.badge-state.pend { background:var(--status-pending); color:#111; }
+.badge-state.ejec { background:var(--status-done); color:#fff; }
+
+
+  /* NUEVO: máscara de carga sobre el mapa */
+.loading-mask{
+  position:absolute; inset:0; display:none; place-items:center; z-index:1200;
+  background:rgba(255,255,255,.6); backdrop-filter:blur(0.8rem);
+}
+.loading-mask.show{ display:grid; }
+.loading-msg{
+  padding:10px 14px; border-radius:12px; background:#ffffff; border:1px solid var(--border);
+  color:var(--text); font-weight:600; letter-spacing:.2px;
+}
+
+.toast{position:absolute;top:12px;right:12px;background:#ffffff;border:1px solid var(--border);padding:8px 10px;border-radius:10px;color:var(--text);z-index:1000; box-shadow:0 8px 24px rgba(12,18,30,.06)}
+
+/* Ocultar cualquier popup default de Leaflet: queremos solo el modal */
+.leaflet-popup,
+.leaflet-popup-pane { display: none !important; }
+
+/* === Basemap switcher compacto === */
+.basemap-grid{ display:flex; gap:8px; }
+.basemap-card{ text-align:center; cursor:pointer; user-select:none; width:72px; }
+.basemap-card .bm-thumb{
+  width:100%; aspect-ratio:1/1; border-radius:12px; background-size:cover; background-position:center;
+  border:1px solid var(--border); box-shadow:inset 0 0 10px rgba(0,0,0,.2);
+}
+.basemap-card .bm-title{ margin-top:4px; font-size:11px; color:var(--muted); }
+.basemap-card.active .bm-thumb{ outline:2px solid #1a90ff; outline-offset:2px; }
