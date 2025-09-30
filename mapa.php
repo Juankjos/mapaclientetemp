@@ -223,8 +223,10 @@ else if ($action === 'poll') {
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   <link rel="stylesheet" href="styles/root.css"/>
+  <link rel="stylesheet" href="styles/offcanvas.css"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 <body>
   <div class="wrap">
@@ -233,7 +235,7 @@ else if ($action === 'poll') {
         class="btn btn-light border position-absolute"
         style="top:12px; right:12px; z-index:1200; background-color: #0e4194; color: white"
         data-bs-toggle="offcanvas" data-bs-target="#sidePanel" aria-controls="sidePanel">
-          Técnico
+        <i class="bi bi-tools"></i> Técnico
       </button>
 
       <!-- Playback options removidas -->

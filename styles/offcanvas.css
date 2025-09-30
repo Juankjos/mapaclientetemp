@@ -1,0 +1,45 @@
+/* 2) El offcanvas usa esa misma variable de ancho */
+#sidePanel{
+    --bs-offcanvas-width: var(--sidePanel-width);
+    z-index: 1400; /* por encima de .ui-card (1100) */
+    transition: transform .6s cubic-bezier(.77,0,.175,1) !important;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+/* 3) Backdrop acompaña suave */
+.offcanvas-backdrop{
+    z-index: 1390;
+    transition: opacity .6s cubic-bezier(.77,0,.175,1) !important;
+}
+
+/* 4) El contenido principal se “empuja” a la izquierda cuando el panel está abierto */
+.map{
+    transition: transform .6s cubic-bezier(.77,0,.175,1);
+    will-change: transform;
+}
+.push-right-open .map{
+    transform: translateX(calc(-1 * var(--sidePanel-width)));
+}
+
+/* 5) (Opcional) fade-in suave del contenido interno */
+#sidePanel .offcanvas-body{
+    opacity: 0;
+    transition: opacity .32s ease;
+    transition-delay: .12s;
+}
+#sidePanel.show .offcanvas-body{
+    opacity: 1;
+}
+
+/* 6) Accesibilidad: si el usuario prefiere menos animación */
+@media (prefers-reduced-motion: reduce){
+    #sidePanel, .offcanvas-backdrop, .map{ transition: none !important; }
+}
+
+/* 7) Móvil: puedes elegir overlay completo (sin push) */
+@media (max-width: 576px){
+    :root{ --sidePanel-width: 100vw; }
+    /* Si quieres que en móvil NO empuje, descomenta la siguiente línea: */
+    /* .push-right-open .map{ transform: none; } */
+}
