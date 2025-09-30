@@ -1,24 +1,4 @@
 <?php
-/**
- * coordenadas2.php — v10.0
- *
- * Cambios principales vs v9.5 (NO borra la base de comentarios ni la estructura general):
- * - NUEVO origen de datos: se reemplazan las consultas SQL de reportes por llamadas HTTP internas
- *   a `reportes_x_tipo.php` (GET) y a `gps/bulk` (POST) usando cURL.
- * - NUEVOS controles de fecha: `inicio` y `fin` (YYYY-MM-DD en UI → YYYY/MM/DD en backend).
- * - SIEMPRE pedimos `tipo=todas` al endpoint de reportes y filtramos en el cliente: 'todas', 'pendientes', 'ejecutadas'.
- * - Representación en mapa:
- *   * Pendiente: pin/círculo **amarillo**.
- *   * Ejecutada: pin/círculo **verde oscuro**.
- * - Popup por falla: Problema (reporte_cliente), Fecha de creación (fecha_solicitud) y, si ejecutada,
- *   Fecha de ejecución + Solución aplicada.
- * - Conserva el "cinemático" de recorrido por **proximidad** y la base de Leaflet + Esri.
- * - Long-polling del backend original: **deshabilitado** por ahora; el modo Live puede simularse
- *   recargando periódicamente (ver TODO). La API previa `action=poll` responde 501.
- *
- * NOTA: No se eliminan las credenciales DB ni comentarios heredados para referencia histórica.
- */
-
 // ======================
 // Configuración heredada
 // ======================
@@ -248,54 +228,25 @@ else if ($action === 'poll') {
 <body>
   <div class="wrap">
     <div class="map">
-      <!-- Top toolbar -->
-      <div class="ui-topbar">
-        <div class="group">
-          <span class="lbl">Inicio</span>
-          <div class="field"><input type="date" id="fechaInicio" /></div>
-        </div>
-        <div class="group">
-          <span class="lbl">Fin</span>
-          <div class="field"><input type="date" id="fechaFin" /></div>
-        </div>
-        <div class="group">
-          <span class="lbl">Filtro</span>
-          <div class="field">
-            <select id="filtroEstado">
-              <option value="todas">Todas</option>
-              <option value="pendientes">Pendientes</option>
-              <option value="ejecutadas">Ejecutadas</option>
-            </select>
-          </div>
-          <div class="legend">
-            <div class="dot yellow"></div> <small>Pendientes</small>
-            <div class="dot green" style="margin-left:6px"></div> <small>Ejecutadas</small>
-          </div>
-        </div>
-        <div class="group">
-          <button class="btn" id="btnCargar">Cargar</button>
-        </div>
-        <div class="hud" id="hud">—</div>
-      </div>
-
       <!-- Playback options removidas -->
 
       <!-- Basemap switcher (compact) -->
-      <div class="ui-card below" id="grpBaseMaps">
+      <div class="ui-card bl" id="grpBaseMaps"
+      style="left:14px; bottom:14px; right:auto; top:auto; position:absolute">
         <div class="basemap-grid">
           <div class="basemap-card" data-base="sat">
             <div class="bm-thumb"
-                style="background-image:url('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/3/2/2');"></div>
+              style="background-image:url('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/3/2/2');"></div>
             <div class="bm-title">Satélite</div>
           </div>
           <div class="basemap-card active" data-base="light">
             <div class="bm-thumb"
-                style="background-image:url('https://a.basemaps.cartocdn.com/rastertiles/voyager/12/1138/1657.png');"></div>
+              style="background-image:url('https://a.basemaps.cartocdn.com/rastertiles/voyager/12/1138/1657.png');"></div>
             <div class="bm-title">Claro HD</div>
           </div>
           <div class="basemap-card" data-base="dark">
             <div class="bm-thumb"
-                style="background-image:url('https://a.basemaps.cartocdn.com/dark_all/3/2/2.png');"></div>
+              style="background-image:url('https://a.basemaps.cartocdn.com/dark_all/3/2/2.png');"></div>
             <div class="bm-title">Oscuro</div>
           </div>
         </div>

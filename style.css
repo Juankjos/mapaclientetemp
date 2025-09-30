@@ -101,3 +101,11 @@ html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-famil
 }
 .basemap-card .bm-title{ margin-top:4px; font-size:11px; color:var(--muted); }
 .basemap-card.active .bm-thumb{ outline:2px solid #1a90ff; outline-offset:2px; }
+
+/* Fuerza el switcher abajo-izquierda */
+.map .ui-card.bl{
+  left: 14px !important;
+  bottom: 14px !important;
+  right: auto !important;
+  top: auto !important;
+}
