@@ -222,12 +222,21 @@ else if ($action === 'poll') {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <style></style>
 </head>
 <body>
   <div class="wrap">
     <div class="map">
+      <button id="btnOffcanvas"
+        class="btn btn-light border position-absolute"
+        style="top:12px; right:12px; z-index:1200"
+        data-bs-toggle="offcanvas" data-bs-target="#sidePanel" aria-controls="sidePanel">
+          Técnico
+      </button>
+
       <!-- Playback options removidas -->
 
       <!-- Basemap switcher (compact) -->
@@ -286,5 +295,56 @@ else if ($action === 'poll') {
   }
   </script>
   <script type="module" src="car-overlay.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+  <!-- Offcanvas lateral derecho -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="sidePanel" aria-labelledby="sidePanelLabel"
+      data-bs-scroll="true" data-bs-backdrop="true" style="--bs-offcanvas-width: 420px;">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="sidePanelLabel">Tu técnico</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+
+    <div class="offcanvas-body pt-0">
+      <!-- Tabs -->
+      <ul class="nav nav-tabs px-2 pt-2" id="panelTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="tab-pedido" data-bs-toggle="tab"
+                  data-bs-target="#tabPanePedido" type="button" role="tab"
+                  aria-controls="tabPanePedido" aria-selected="true">
+            Servicio
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-satis" data-bs-toggle="tab"
+                  data-bs-target="#tabPaneSatis" type="button" role="tab"
+                  aria-controls="tabPaneSatis" aria-selected="false">
+            Satisfacción
+          </button>
+        </li>
+      </ul>
+
+      <!-- Contenido de las pestañas -->
+      <div class="tab-content p-3" id="panelTabsContent">
+        <!-- Pestaña: Pedido -->
+        <div class="tab-pane fade show active" id="tabPanePedido" role="tabpanel" aria-labelledby="tab-pedido">
+          <div class="text-muted">Orden de servicio:</div>
+          <div id="pedidoTitulo" class="fs-5 fw-semibold">
+            Instalación de acometida
+          </div>
+          <!-- Si quieres más campos, añádelos aquí -->
+        </div>
+
+        <!-- Pestaña: Satisfacción -->
+        <div class="tab-pane fade" id="tabPaneSatis" role="tabpanel" aria-labelledby="tab-satis">
+          <div class="text-center my-4">
+            <div id="satisPorcentaje" class="display-3 fw-bold">92%</div>
+            <div id="satisComentario" class="text-muted">Detalles de Satisfacción</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
