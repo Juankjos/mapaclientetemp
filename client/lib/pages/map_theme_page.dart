@@ -18,8 +18,9 @@ class _MapThemePageState extends State<MapThemePage> {
   final MapController _mapController = MapController();
   MapTheme _theme = MapTheme.light;
 
+  LatLng? _myLocation; 
   // Centro inicial (Guadalajara aprox.)
-  static const LatLng _initialCenter = LatLng(20.6736, -103.344);
+  static const LatLng _initialCenter = LatLng(20.81692, -102.76347);
   static const double _initialZoom = 13;
 
   // Devuelve el urlTemplate y la atribución según el tema.
@@ -88,12 +89,17 @@ class _MapThemePageState extends State<MapThemePage> {
               ),
               MarkerLayer(
                 markers: [
-                  Marker(
-                    point: _initialCenter,
-                    width: 40,
-                    height: 40,
-                    child: const Icon(Icons.location_pin, size: 40),
-                  ),
+                  if (_myLocation != null)
+                    Marker(
+                      point: _myLocation!,
+                      width: 48,
+                      height: 48,
+                      alignment: Alignment.bottomCenter, // opcional: “punta” al punto
+                      child: Image.asset(
+                        'lib/model/carro.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                 ],
               ),
             ],
@@ -165,6 +171,9 @@ class _MapThemePageState extends State<MapThemePage> {
       desiredAccuracy: LocationAccuracy.best,
     );
     final here = LatLng(pos.latitude, pos.longitude);
+    setState(() {
+      _myLocation = here;      // <— esto hace que se pinte el marker
+    });
     _mapController.move(here, 16);
   }
 }
