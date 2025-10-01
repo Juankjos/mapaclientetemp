@@ -30,7 +30,7 @@ class _MapThemePageState extends State<MapThemePage> {
         // Esri Dark Gray Canvas (no requiere key)
         return (
           url:
-              'https://services.arcgisonline .com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+              'https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
           attribution:
               '© Esri, HERE, Garmin, FAO, NOAA, USGS — Esri Dark Gray Canvas'
         );
