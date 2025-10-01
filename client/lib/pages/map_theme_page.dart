@@ -58,6 +58,10 @@ class _MapThemePageState extends State<MapThemePage> {
         backgroundColor: const Color.fromARGB(255, 8, 64, 110),
         foregroundColor: Colors.white,
         actions: [
+          Text(
+                'Estilo del mapa',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+              ),
           IconButton(
             icon: const Icon(Icons.map_outlined, color: Colors.white),
             onPressed: () => _showMapThemePicker(context),
