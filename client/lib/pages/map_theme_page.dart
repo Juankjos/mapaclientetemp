@@ -56,26 +56,40 @@ class _MapThemePageState extends State<MapThemePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mapa con cambio de tema'),
+        title: const Text('Rastreo de Técnico'),
+        backgroundColor: const Color.fromARGB(255, 8, 64, 110),
+        foregroundColor: Colors.white,
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<MapTheme>(
                 value: _theme,
-                icon: const Icon(Icons.map_outlined),
+                icon: const Icon(
+                  Icons.map_outlined,
+                  color: Colors.white,
+                ),
                 items: const [
                   DropdownMenuItem(
                     value: MapTheme.light,
-                    child: Text('Claro'),
+                    child: Text(
+                      'Claro',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                   DropdownMenuItem(
                     value: MapTheme.dark,
-                    child: Text('Oscuro'),
+                    child: Text(
+                      'Oscuro',
+                      style: TextStyle(color: Colors.white),
+                      ),
                   ),
                   DropdownMenuItem(
                     value: MapTheme.satellite,
-                    child: Text('Satelital'),
+                    child: Text(
+                      'Satelital',
+                      style: TextStyle(color: Colors.white),
+                      ),
                   ),
                 ],
                 onChanged: (v) {
